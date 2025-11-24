@@ -13,8 +13,16 @@ class PageInfoAlbums extends StatefulWidget {
 
 class _PageInfoAlbumsState extends State<PageInfoAlbums> {
 
-  bool favoriAlbum = false;
+  late bool favoriAlbum;
   List <Map<String, dynamic>> ListeAlbumDesc = FavoriAlbum.listeAlbums;
+  
+  @override
+  void initState() {
+    super.initState();
+    // Initialiser avec la valeur actuelle de l'album
+    int index = ListeAlbumDesc.indexWhere((element) => element['nomAlbum'] == widget.album.nomAlbum);
+    favoriAlbum = index != -1 ? (ListeAlbumDesc[index]['favori'] ?? false) : false;
+  }
   
   void _toggleFavorite(String rechercheIndex) {
     int index = ListeAlbumDesc.indexWhere((element) => element['nomAlbum'] == rechercheIndex);
