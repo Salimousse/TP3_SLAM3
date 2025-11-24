@@ -79,6 +79,7 @@ class _AlbumState extends State<Album> {
                         )
                      )
                   ),
+                  // met en jaune l'icone si mis en favori 
                   Icon(
                     isFavori ? Icons.star : Icons.star_border,
                     color: isFavori ? Colors.amber : Colors.grey,

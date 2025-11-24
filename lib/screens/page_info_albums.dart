@@ -23,7 +23,7 @@ class _PageInfoAlbumsState extends State<PageInfoAlbums> {
     int index = ListeAlbumDesc.indexWhere((element) => element['nomAlbum'] == widget.album.nomAlbum);
     favoriAlbum = index != -1 ? (ListeAlbumDesc[index]['favori'] ?? false) : false;
   }
-  
+  // fonction pour changer le statut favori
   void _toggleFavorite(String rechercheIndex) {
     int index = ListeAlbumDesc.indexWhere((element) => element['nomAlbum'] == rechercheIndex);
     setState(() {
@@ -39,6 +39,7 @@ class _PageInfoAlbumsState extends State<PageInfoAlbums> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Informations sur l'album"),
+        // le bouton recupere le statut favori et le renvoie a la page precedente
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
@@ -87,6 +88,7 @@ class _PageInfoAlbumsState extends State<PageInfoAlbums> {
                     widget.album.description,
                     style: const TextStyle(fontSize: 16),
                   ),
+                  // bouton favori mis en noir si favori
                   ElevatedButton.icon(
                     icon: Icon(favoriAlbum ? Icons.star : Icons.star_border),
                     style: favoriAlbum ? ElevatedButton.styleFrom(backgroundColor: Colors.black) : null,  
