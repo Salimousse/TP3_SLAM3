@@ -11,13 +11,13 @@ class ListeAlbums extends StatefulWidget {
 class _ListeAlbumsState extends State<ListeAlbums> {
   List<Map<dynamic, dynamic>> listeAlbumDesc = [];
   List<Map<dynamic, dynamic>> _initialList = [];
-
+// fonction mise à jour de la liste
  void updateList(List<Map> updatedList) {
   setState(() {
     listeAlbumDesc = updatedList.map((e) => Map<dynamic, dynamic>.from(e)).toList();
   });
 }
-
+// fonction recherche
   void recherche(String chaineCa) {
     setState(() {
       if (chaineCa.isEmpty) {
@@ -34,6 +34,7 @@ class _ListeAlbumsState extends State<ListeAlbums> {
   @override
   void initState() {
     super.initState();
+    // initialise la liste
     _initialList = [
       {'nomAlbum': 'Metallica'},
       {'nomAlbum': 'Ride the Lightning'},
@@ -51,6 +52,7 @@ class _ListeAlbumsState extends State<ListeAlbums> {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
+            // barre de recherche
             child: TextField(
               decoration: InputDecoration(
                 hintText: 'Rechercher un album',
@@ -69,6 +71,7 @@ class _ListeAlbumsState extends State<ListeAlbums> {
               shrinkWrap: true,
               padding: const EdgeInsets.fromLTRB(2.0, 10.0, 2.0, 10.0),
               children: <Widget>[
+                // si le nom de l'album est ecrit dans la barre de recherche, on l'affiche
                 if (listeAlbumDesc.isEmpty || listeAlbumDesc.any((a) => a['nomAlbum'] == 'Metallica'))
                   Album(
                     nomAlbum: "Metallica",
@@ -77,6 +80,7 @@ class _ListeAlbumsState extends State<ListeAlbums> {
                     image: "Metallica.jpg",
                     updateList: updateList,
                   ),
+                  // si le nom de l'album est ecrit dans la barre de recherche, on l'affiche
                 if (listeAlbumDesc.isEmpty || listeAlbumDesc.any((a) => a['nomAlbum'] == 'Ride the Lightning'))
                   Album(
                     nomAlbum: "Ride the Lightning",
@@ -85,6 +89,7 @@ class _ListeAlbumsState extends State<ListeAlbums> {
                     image: "Ride the Lightning.jpg",
                     updateList: updateList,
                   ),
+                  // si le nom de l'album est ecrit dans la barre de recherche, on l'affiche
                 if (listeAlbumDesc.isEmpty || listeAlbumDesc.any((a) => a['nomAlbum'] == 'Master of Puppets'))
                   Album(
                     nomAlbum: "Master of Puppets",

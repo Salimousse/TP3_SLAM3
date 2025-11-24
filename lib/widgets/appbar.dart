@@ -19,8 +19,7 @@ class AppBar_Principal extends StatefulWidget implements PreferredSizeWidget {
         backgroundColor: Colors.green,
         title: Text(widget.title),
       actions: <Widget>[
-        IconButton( icon: Icon(Icons.search),
-           onPressed: () {}),
+        
            IconButton (icon : Icon(Icons.lightbulb),
            onPressed: () {}),
       ],

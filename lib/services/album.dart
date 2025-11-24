@@ -20,7 +20,7 @@ class Album extends StatefulWidget {
 }
 
 class _AlbumState extends State<Album> {
-
+// fonction mise à jour de la liste des favoris
  void updateFavorite(bool newFavorite) {
     List<Map<String, dynamic>> listeAlbumDesc = FavoriAlbum.listeAlbums;
     int index = listeAlbumDesc.indexWhere((element) => element['nomAlbum'] == widget.nomAlbum);
