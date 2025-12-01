@@ -3,10 +3,16 @@ import 'package:flutter_application_2/screens/page_parametres.dart';
 import 'package:flutter_application_2/widgets/appbar.dart';
 import 'package:flutter_application_2/screens/page_accueil.dart';
 import 'package:flutter_application_2/screens/page_liste_albums.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 
 
-void main() {
+void main()  async {
+WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
+
+
   runApp(const MyApp());
 }
 

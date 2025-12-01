@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_2/services/album.dart';
 import 'package:flutter_application_2/models/DataClass/AlbumAPI.dart';
 import 'package:flutter_application_2/services/connexionAlbumAPI.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 class ListeAlbums extends StatefulWidget {
   const ListeAlbums({Key? key }) : super(key: key);
@@ -53,6 +54,7 @@ class _ListeAlbumsState extends State<ListeAlbums> {
       _loadingError = true;
       _chargerDonneesEnDur();
     }
+    FlutterNativeSplash.remove(); 
 
     return listeAlbumDesc;
   }
