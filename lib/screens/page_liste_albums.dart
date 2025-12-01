@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/services/album.dart';
+import 'package:flutter_application_2/models/DataClass/AlbumAPI.dart';
+import 'package:flutter_application_2/services/connexionAlbumAPI.dart';
 
 class ListeAlbums extends StatefulWidget {
   const ListeAlbums({Key? key }) : super(key: key);
@@ -19,7 +21,29 @@ class _ListeAlbumsState extends State<ListeAlbums> {
   setState(() {
     listeAlbumDesc = updatedList.map((e) => Map<dynamic, dynamic>.from(e)).toList();
   });
+
 }
+ Future<List<Map>> listeAlbumAPI() async {
+    listeAlbumDesc = [];
+    List<AlbumApi>? listeAlbumAPI = await ConnexionAlbumAPI().getAlbums();
+    if (listeAlbumAPI != null) {
+      listeAlbumAPI.forEach((e) {
+        listeAlbumDesc.add({
+          'idAlbum': e.idalbum,
+          'nomAlbum': e.nomalbum,
+          'description': e.descalbum,
+          'nomGroupe': e.artistealbum,
+          'image': e.pochettealbum,
+          'favori': false,
+        });
+      });
+    }
+
+    return listeAlbumDesc;
+  }
+
+
+
 // fonction recherche
   void recherche(String chaineCa) {
     setState(() {
@@ -31,19 +55,19 @@ class _ListeAlbumsState extends State<ListeAlbums> {
           return albumName.contains(chaineCa.toLowerCase());
         }).toList();
       }
+  
     });
   }
 
   @override
   void initState() {
     super.initState();
-    // initialise la liste pour la recherche 
-    _initialList = [
-      {'nomAlbum': 'Metallica'},
-      {'nomAlbum': 'Ride the Lightning'},
-      {'nomAlbum': 'Master of Puppets'},
-    ];
-    listeAlbumDesc = List.from(_initialList);
+    listeAlbumAPI().then((value) {
+      setState(() {
+        listeAlbumDesc = value;
+        _initialList = [...listeAlbumDesc];
+      });
+    });
   }
 
   @override
@@ -64,12 +88,38 @@ class _ListeAlbumsState extends State<ListeAlbums> {
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
+              // appel de la fonction recherche lors de la saisie
               onChanged: (value) {
                 recherche(value);
               },
             ),
           ),
+          // liste des albums
           Expanded(
+            child: ListView.builder(
+              itemCount: listeAlbumDesc.length,
+              itemBuilder: (context, index) {
+                return Album(
+                  nomAlbum: listeAlbumDesc[index]['nomAlbum'],
+                  description: listeAlbumDesc[index]['description'],
+                  nomGroupe: listeAlbumDesc[index]['nomGroupe'],
+                  image: listeAlbumDesc[index]['image'],
+                  updateList: updateList,
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+}
+
+
+
+
+/* code de base ou on affiche les données en dur 
             child: ListView(
               shrinkWrap: true,
               padding: const EdgeInsets.fromLTRB(2.0, 10.0, 2.0, 10.0),
@@ -103,13 +153,4 @@ class _ListeAlbumsState extends State<ListeAlbums> {
                     image: "Master of Puppets.jpg",
                      // affiche le favori mis à jour
                     updateList: updateList,
-                  ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
+                    */
