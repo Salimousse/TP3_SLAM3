@@ -47,12 +47,12 @@ class _ListeAlbumsState extends State<ListeAlbums> {
       });
       } else {
         _loadingError = true;
-        // _chargerDonneesEnDur();
+        _chargerDonneesEnDur();
       }
     } catch (e) {
       // En cas d'erreur (timeout, erreur réseau, etc.)
       _loadingError = true;
-      // _chargerDonneesEnDur();
+       _chargerDonneesEnDur();
     }
     FlutterNativeSplash.remove(); 
 
