@@ -3,6 +3,7 @@ import 'package:flutter_application_2/screens/page_parametres.dart';
 import 'package:flutter_application_2/widgets/appbar.dart';
 import 'package:flutter_application_2/screens/page_accueil.dart';
 import 'package:flutter_application_2/screens/page_liste_albums.dart';
+import 'package:flutter_application_2/screens/page_ajout_albums.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 
@@ -49,11 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   int _currentIndex = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -97,8 +94,19 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       floatingActionButton: _currentIndex == 0 ? FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
+        onPressed: () async {
+          final result = await Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const PageAjoutAlbums()),
+          );
+          // Si un album a été ajouté, naviguer vers la liste des albums
+          if (result == true) {
+            setState(() {
+              _currentIndex = 1; // Aller à l'onglet "Liste des albums"
+            });
+          }
+        },
+        tooltip: 'Ajouter un album',
         child: const Icon(Icons.add),
       ) : null,
     );
