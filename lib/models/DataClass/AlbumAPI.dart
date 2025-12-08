@@ -9,25 +9,25 @@ String postAlbumToJson(List<AlbumApi> data) =>
 class AlbumApi {
   AlbumApi({
     required this.idalbum,
-    required this.nomalbum,
-    required this.descalbum,
-    required this.artistealbum,
+    this.nomalbum,
+    this.descalbum,
+    this.artistealbum,
     required this.groupealbum,
-    required this.pochettealbum,
-    required this.compositeuralbum,
-    required this.linkyoualbum,
-    required this.linkartiestalbum,
+    this.pochettealbum,
+    this.compositeuralbum,
+    this.linkyoualbum,
+    this.linkartiestalbum,
   });
 
   int idalbum;
-  String nomalbum;
-  String descalbum;
-  String artistealbum;
+  String? nomalbum;
+  String? descalbum;
+  String? artistealbum;
   bool groupealbum;
-  String pochettealbum;
-  String compositeuralbum;
-  String linkyoualbum;
-  String linkartiestalbum;
+  String? pochettealbum;
+  String? compositeuralbum;
+  String? linkyoualbum;
+  String? linkartiestalbum;
 
 
 

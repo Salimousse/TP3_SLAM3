@@ -65,7 +65,13 @@ class _AlbumState extends State<Album> {
          padding: EdgeInsets.all(2) ,   child: Card( 
             child: Row(
                mainAxisAlignment: MainAxisAlignment.spaceEvenly, children:    <Widget>[
-                  Image.asset("assets/images/" +widget.image!), 
+                  widget.image != null && widget.image!.isNotEmpty
+                    ? (widget.image!.startsWith('http')
+                        ? Image.network(widget.image!, width: 100, height: 100, fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) => Icon(Icons.album, size: 100))
+                        : Image.asset("assets/images/${widget.image!}", width: 100, height: 100, fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) => Icon(Icons.album, size: 100)))
+                    : Icon(Icons.album, size: 100),
                   Expanded(
                      child: Container(
                         padding: EdgeInsets.all(5), child: Column(

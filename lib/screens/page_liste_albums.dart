@@ -38,21 +38,21 @@ class _ListeAlbumsState extends State<ListeAlbums> {
       listeAlbumAPI.forEach((e) {
         listeAlbumDesc.add({
           'idAlbum': e.idalbum,
-          'nomAlbum': e.nomalbum,
-          'description': e.descalbum,
-          'nomGroupe': e.artistealbum,
-          'image': e.pochettealbum,
+          'nomAlbum': e.nomalbum ?? 'Album sans nom',
+          'description': e.descalbum ?? 'Pas de description',
+          'nomGroupe': e.artistealbum ?? 'Artiste inconnu',
+          'image': e.pochettealbum ?? '',
           'favori': false,
         });
       });
       } else {
         _loadingError = true;
-        _chargerDonneesEnDur();
+        // _chargerDonneesEnDur();
       }
     } catch (e) {
       // En cas d'erreur (timeout, erreur réseau, etc.)
       _loadingError = true;
-      _chargerDonneesEnDur();
+      // _chargerDonneesEnDur();
     }
     FlutterNativeSplash.remove(); 
 
