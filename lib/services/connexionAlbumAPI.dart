@@ -7,6 +7,7 @@ class ConnexionAlbumAPI {
     try {
       var uri = Uri.parse('http://192.168.203.10:81/api/albums');
       var response = await http.get(uri);
+      print("Réponse GET albums: ${response.body}"); // LOG AJOUTÉ
       if (response.statusCode == 200) {
         return albumApiFromJson(response.body);
       }
@@ -38,9 +39,7 @@ class ConnexionAlbumAPI {
     }),
   );
 
-  print("Réponse API Code: ${response.statusCode}");
-  print("Réponse API Body: ${response.body}");
-
+ 
   if (response.statusCode == 201) {
     // si 201 alors l’enregistrement est bien créé
     return true;

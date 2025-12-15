@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/models/favori_album.dart';
 import 'package:flutter_application_2/models/info_album.dart';
+import 'package:flutter_application_2/widgets/youtube_video_player.dart';
 
 class PageInfoAlbums extends StatefulWidget {
   final InfoAlbum album;
@@ -56,7 +57,9 @@ class _PageInfoAlbumsState extends State<PageInfoAlbums> {
               height: 300,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/images/" + widget.album.image),
+                  image: widget.album.image.startsWith('http')
+                      ? NetworkImage(widget.album.image)
+                      : AssetImage("assets/images/" + widget.album.image) as ImageProvider,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -98,8 +101,19 @@ class _PageInfoAlbumsState extends State<PageInfoAlbums> {
                         _toggleFavorite(widget.album.nomAlbum);
                       });
                     },
-                  )
-                  ,
+                  ),
+                  const SizedBox(height: 20),
+                  if (widget.album.linkyoualbum != null && widget.album.linkyoualbum!.isNotEmpty) ...[
+                    const Text(
+                      "Extrait vidéo",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    YoutubeVideoPlayer(videoUrl: widget.album.linkyoualbum!),
+                  ],
                 ],
                   ),
             ),

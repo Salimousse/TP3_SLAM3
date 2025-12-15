@@ -36,12 +36,14 @@ class _ListeAlbumsState extends State<ListeAlbums> {
       );
       if (listeAlbumAPI != null && listeAlbumAPI.isNotEmpty) {
       listeAlbumAPI.forEach((e) {
+        print("Album: ${e.nomalbum}, LinkYouTube: ${e.linkyoualbum}"); // LOG AJOUTÉ
         listeAlbumDesc.add({
           'idAlbum': e.idalbum,
           'nomAlbum': e.nomalbum ?? 'Album sans nom',
           'description': e.descalbum ?? 'Pas de description',
           'nomGroupe': e.artistealbum ?? 'Artiste inconnu',
           'image': e.pochettealbum ?? '',
+          'linkyoualbum': e.linkyoualbum ?? '',
           'favori': false,
         });
       });
@@ -68,6 +70,7 @@ class _ListeAlbumsState extends State<ListeAlbums> {
         'description': "L'album marque une évolution importante dans le style du groupe. Les tempos sont plus lents, les morceaux plus courts et leurs structures beaucoup plus simples, aspirant ainsi à du simple rock. C'est principalement un album de heavy metal, et il n'y a plus beaucoup de traces de thrash metal. ",
         'nomGroupe': 'Metallica',
         'image': 'Metallica.jpg',
+        'linkyoualbum': 'https://www.youtube.com/watch?v=CD-E-LDc384', // Ajout pour test
         'favori': false,
       },
       {
@@ -153,6 +156,7 @@ class _ListeAlbumsState extends State<ListeAlbums> {
                         description: listeAlbumDesc[index]['description'],
                         nomGroupe: listeAlbumDesc[index]['nomGroupe'],
                         image: listeAlbumDesc[index]['image'],
+                        linkyoualbum: listeAlbumDesc[index]['linkyoualbum'],
                         updateList: updateList,
                       );
                     },
