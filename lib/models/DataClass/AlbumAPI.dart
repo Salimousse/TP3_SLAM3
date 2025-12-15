@@ -16,7 +16,7 @@ class AlbumApi {
     this.pochettealbum,
     this.compositeuralbum,
     this.linkyoualbum,
-    this.linkartiestalbum,
+    this.linkartistealbum,
   });
 
   int idalbum;
@@ -27,7 +27,7 @@ class AlbumApi {
   String? pochettealbum;
   String? compositeuralbum;
   String? linkyoualbum;
-  String? linkartiestalbum;
+  String? linkartistealbum;
 
 
 
@@ -40,7 +40,7 @@ class AlbumApi {
         pochettealbum: json["pochettealbum"],
         compositeuralbum: json["compositeuralbum"],
         linkyoualbum: json["linkyoualbum"],
-        linkartiestalbum: json["linkartiestalbum"],
+        linkartistealbum: json["linkartistealbum"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -52,7 +52,7 @@ class AlbumApi {
         "pochettealbum": pochettealbum,
         "compositeuralbum": compositeuralbum,
         "linkyoualbum": linkyoualbum,
-        "linkartiestalbum": linkartiestalbum,
+        "linkartistealbum": linkartistealbum,
       };
 
   

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_2/models/favori_album.dart';
 import 'package:flutter_application_2/models/info_album.dart';
 import 'package:flutter_application_2/widgets/youtube_video_player.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 
 class PageInfoAlbums extends StatefulWidget {
   final InfoAlbum album;
@@ -91,6 +93,42 @@ class _PageInfoAlbumsState extends State<PageInfoAlbums> {
                     widget.album.description,
                     style: const TextStyle(fontSize: 16),
                   ),
+
+                  const SizedBox(height: 20),
+
+                  
+                  // lien artiste
+                  if (widget.album.linkArtiste != null && widget.album.linkArtiste!.isNotEmpty) ...[
+                    const Text(
+                      "Lien vers l'artiste",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+
+                    const SizedBox(height: 10),
+
+                    ElevatedButton.icon(
+                      icon: const Icon(Icons.link),
+                      label: const Text("Voir l'artiste"),
+                      onPressed: () async {
+                        final url = widget.album.linkArtiste;
+                        if (url != null && url.isNotEmpty) {
+                          final uri = Uri.parse(url);
+                          if (await canLaunchUrl(uri)) {
+                            await launchUrl(uri);
+                          } else {
+                            if (context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('Impossible d\'ouvrir le lien')),
+                              );
+                            }
+                          }
+                        }
+                      },
+                    ),
+                  ],
                   // bouton favori mis en noir si favori
                   ElevatedButton.icon(
                     icon: Icon(favoriAlbum ? Icons.star : Icons.star_border),
@@ -103,6 +141,9 @@ class _PageInfoAlbumsState extends State<PageInfoAlbums> {
                     },
                   ),
                   const SizedBox(height: 20),
+
+
+                  // si lien video alors youtube player 
                   if (widget.album.linkyoualbum != null && widget.album.linkyoualbum!.isNotEmpty) ...[
                     const Text(
                       "Extrait vidéo",

@@ -7,7 +7,6 @@ class ConnexionAlbumAPI {
     try {
       var uri = Uri.parse('http://192.168.203.10:81/api/albums');
       var response = await http.get(uri);
-      print("Réponse GET albums: ${response.body}"); // LOG AJOUTÉ
       if (response.statusCode == 200) {
         return albumApiFromJson(response.body);
       }

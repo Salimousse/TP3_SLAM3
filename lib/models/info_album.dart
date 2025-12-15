@@ -4,6 +4,7 @@ class InfoAlbum {
   final String nomGroupe;
   final String image;
   final String? linkyoualbum;
+  final String? linkArtiste;
 
   InfoAlbum({
     required this.nomAlbum,
@@ -11,5 +12,6 @@ class InfoAlbum {
     required this.nomGroupe,
     required this.image,
     this.linkyoualbum,
+    this.linkArtiste,
   });
 }

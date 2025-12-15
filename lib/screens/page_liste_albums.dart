@@ -36,7 +36,6 @@ class _ListeAlbumsState extends State<ListeAlbums> {
       );
       if (listeAlbumAPI != null && listeAlbumAPI.isNotEmpty) {
       listeAlbumAPI.forEach((e) {
-        print("Album: ${e.nomalbum}, LinkYouTube: ${e.linkyoualbum}"); // LOG AJOUTÉ
         listeAlbumDesc.add({
           'idAlbum': e.idalbum,
           'nomAlbum': e.nomalbum ?? 'Album sans nom',
@@ -44,6 +43,7 @@ class _ListeAlbumsState extends State<ListeAlbums> {
           'nomGroupe': e.artistealbum ?? 'Artiste inconnu',
           'image': e.pochettealbum ?? '',
           'linkyoualbum': e.linkyoualbum ?? '',
+          'linkArtiste': e.linkartistealbum ?? '',
           'favori': false,
         });
       });
@@ -157,6 +157,7 @@ class _ListeAlbumsState extends State<ListeAlbums> {
                         nomGroupe: listeAlbumDesc[index]['nomGroupe'],
                         image: listeAlbumDesc[index]['image'],
                         linkyoualbum: listeAlbumDesc[index]['linkyoualbum'],
+                        linkArtiste: listeAlbumDesc[index]['linkArtiste'],
                         updateList: updateList,
                       );
                     },

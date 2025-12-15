@@ -7,13 +7,14 @@ import 'package:flutter_application_2/screens/page_liste_albums.dart';
 
 
 class Album extends StatefulWidget {
-    Album({Key? key, this.nomAlbum, this.description, this.nomGroupe, this.image, this.linkyoualbum, required this.updateList}) 
+    Album({Key? key, this.nomAlbum, this.description, this.nomGroupe, this.image, this.linkyoualbum, this.linkArtiste, required this.updateList}) 
       : super(key: key); 
    final String? nomAlbum; 
    final String? description; 
    final String? nomGroupe; 
    final String? image;
    final String? linkyoualbum;
+   final String? linkArtiste;
    final Function(List<Map<dynamic, dynamic>>) updateList;
 
   @override
@@ -46,6 +47,7 @@ class _AlbumState extends State<Album> {
             nomGroupe: widget.nomGroupe ?? '',
             image: widget.image ?? '',
             linkyoualbum: widget.linkyoualbum,
+            linkArtiste: widget.linkArtiste,
           );
 
           SystemChrome.setEnabledSystemUIMode(
