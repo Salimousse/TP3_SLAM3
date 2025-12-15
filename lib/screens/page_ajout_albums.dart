@@ -100,6 +100,24 @@ import 'package:flutter_application_2/services/connexionAlbumAPI.dart';
                     return null;
                   },
                 ),
+                TextFormField(
+                  decoration: const InputDecoration(
+                    labelText: 'Lien YouTube',
+                  ),
+                  validator: (value) {
+                    _linkyoualbum = value;
+                    return null;
+                  },
+                ),
+                TextFormField(
+                  decoration: const InputDecoration(
+                    labelText: 'Lien Artiste',
+                  ),
+                  validator: (value) {
+                    _linkartiestalbum = value;
+                    return null;
+                  },
+                ),
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () async {
@@ -112,7 +130,9 @@ import 'package:flutter_application_2/services/connexionAlbumAPI.dart';
                         _artistealbum!, 
                         _groupealbum, 
                         _pochettealbum ?? '', 
-                        _compoAlbum ?? '', 
+                        _compoAlbum ?? '',
+                        _linkyoualbum ?? '',
+                        _linkartiestalbum ?? '',
                       
                       );
                       

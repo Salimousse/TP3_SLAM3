@@ -17,31 +17,38 @@ class ConnexionAlbumAPI {
     }
 
 
-    Future<bool> createAlbum(String nomAlbum, String descAlbum,String artisteAlbum, bool groupeAlbum, String pochetteAlbum, String compoAlbum ) async {
+    Future<bool> createAlbum(String nomAlbum, String descAlbum,String artisteAlbum, bool groupeAlbum, String pochetteAlbum, String compoAlbum, String linkAlbum , String linkArtiste ) async {
+      print("--- Début createAlbum ---");
+      print("Données envoyées : Nom=$nomAlbum, Artiste=$artisteAlbum, Groupe=$groupeAlbum");
+      
   final response = await http.post(
     Uri.parse('http://192.168.203.10:81/api/albums'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
-    body: jsonEncode(<String, String>{
+    body: jsonEncode(<String, dynamic>{
       "nomalbum": nomAlbum,
       "descalbum": descAlbum,
       "artistealbum": artisteAlbum,
-      "groupealbum": groupeAlbum.toString(),
+      "groupealbum": groupeAlbum,
       "pochettealbum": pochetteAlbum,
       "compositeuralbum": compoAlbum,
-      
+      "linkyoualbum": linkAlbum,
+      "linkartistealbum": linkArtiste,
     }),
   );
 
-  if (response.statusCode == 201 || response.statusCode == 200) {
-    // si 201 ou 200 alors l'enregistrement est bien créé
-    print('✓ Album créé - Code: ${response.statusCode}');
+  print("Réponse API Code: ${response.statusCode}");
+  print("Réponse API Body: ${response.body}");
+
+  if (response.statusCode == 201) {
+    // si 201 alors l’enregistrement est bien créé
     return true;
   } else {
-    print('✗ Echec - Code: ${response.statusCode}, Réponse: ${response.body}');
-    return false;
+     print("Erreur lors de la création de l'album");
+     return false;
      
   }
+
 }
 }
