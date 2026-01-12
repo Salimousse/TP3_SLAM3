@@ -1,4 +1,5 @@
 class InfoAlbum {
+  final int id; // Ajout de l'id
   final String nomAlbum;
   final String description;
   final String nomGroupe;
@@ -7,6 +8,7 @@ class InfoAlbum {
   final String? linkArtiste;
 
   InfoAlbum({
+    required this.id,
     required this.nomAlbum,
     required this.description,
     required this.nomGroupe,

@@ -7,15 +7,16 @@ import 'package:flutter_application_2/screens/page_liste_albums.dart';
 
 
 class Album extends StatefulWidget {
-    Album({Key? key, this.nomAlbum, this.description, this.nomGroupe, this.image, this.linkyoualbum, this.linkArtiste, required this.updateList}) 
-      : super(key: key); 
-   final String? nomAlbum; 
-   final String? description; 
-   final String? nomGroupe; 
-   final String? image;
-   final String? linkyoualbum;
-   final String? linkArtiste;
-   final Function(List<Map<dynamic, dynamic>>) updateList;
+   Album({Key? key, required this.idAlbum, this.nomAlbum, this.description, this.nomGroupe, this.image, this.linkyoualbum, this.linkArtiste, required this.updateList}) 
+    : super(key: key); 
+  final int idAlbum;
+  final String? nomAlbum; 
+  final String? description; 
+  final String? nomGroupe; 
+  final String? image;
+  final String? linkyoualbum;
+  final String? linkArtiste;
+  final Function(List<Map<dynamic, dynamic>>) updateList;
 
   @override
   State<Album> createState() => _AlbumState();
@@ -42,6 +43,7 @@ class _AlbumState extends State<Album> {
       return GestureDetector(
         onTap: () async {
           InfoAlbum album = InfoAlbum(
+            id: widget.idAlbum,
             nomAlbum: widget.nomAlbum ?? '',
             description: widget.description ?? '',
             nomGroupe: widget.nomGroupe ?? '',
@@ -53,17 +55,13 @@ class _AlbumState extends State<Album> {
           SystemChrome.setEnabledSystemUIMode(
             SystemUiMode.immersive,
           );
-          
           final result = await Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => PageInfoAlbums(album: album),
             ),
           );
-          
-          if (result != null && result is bool) {
-            updateFavorite(result);
-          }
+          // Ne rien faire ici, la page liste doit gérer le rafraîchissement si besoin
         },
         child: Container(
          padding: EdgeInsets.all(2) ,   child: Card( 

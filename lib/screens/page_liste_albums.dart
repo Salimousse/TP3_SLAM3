@@ -151,15 +151,16 @@ class _ListeAlbumsState extends State<ListeAlbums> {
                 : ListView.builder(
                     itemCount: listeAlbumDesc.length,
                     itemBuilder: (context, index) {
-                      return Album(
-                        nomAlbum: listeAlbumDesc[index]['nomAlbum'],
-                        description: listeAlbumDesc[index]['description'],
-                        nomGroupe: listeAlbumDesc[index]['nomGroupe'],
-                        image: listeAlbumDesc[index]['image'],
-                        linkyoualbum: listeAlbumDesc[index]['linkyoualbum'],
-                        linkArtiste: listeAlbumDesc[index]['linkArtiste'],
-                        updateList: updateList,
-                      );
+                        return Album(
+                          idAlbum: listeAlbumDesc[index]['idAlbum'],
+                          nomAlbum: listeAlbumDesc[index]['nomAlbum'],
+                          description: listeAlbumDesc[index]['description'],
+                          nomGroupe: listeAlbumDesc[index]['nomGroupe'],
+                          image: listeAlbumDesc[index]['image'],
+                          linkyoualbum: listeAlbumDesc[index]['linkyoualbum'],
+                          linkArtiste: listeAlbumDesc[index]['linkArtiste'],
+                          updateList: updateList,
+                        );
                     },
                   ),
           ),

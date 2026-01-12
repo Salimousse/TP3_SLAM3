@@ -3,6 +3,9 @@ import 'package:flutter_application_2/models/favori_album.dart';
 import 'package:flutter_application_2/models/info_album.dart';
 import 'package:flutter_application_2/widgets/youtube_video_player.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_application_2/screens/page_modif_album.dart';
+import 'package:flutter_application_2/models/DataClass/AlbumAPI.dart';
+
 
 
 class PageInfoAlbums extends StatefulWidget {
@@ -42,13 +45,38 @@ class _PageInfoAlbumsState extends State<PageInfoAlbums> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Informations sur l'album"),
-        // le bouton recupere le statut favori et le renvoie a la page precedente
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context, favoriAlbum);
           },
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.edit),
+            tooltip: 'Modifier',
+            onPressed: () async {
+              final idAlbum = widget.album.id;
+              final albumApi = AlbumApi(
+                idalbum: idAlbum,
+                nomalbum: widget.album.nomAlbum,
+                descalbum: widget.album.description,
+                artistealbum: widget.album.nomGroupe,
+                groupealbum: false,
+                pochettealbum: widget.album.image,
+                compositeuralbum: '',
+                linkyoualbum: widget.album.linkyoualbum,
+                linkartistealbum: widget.album.linkArtiste,
+              );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PageModifAlbum(album: albumApi, idAlbum: idAlbum),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(

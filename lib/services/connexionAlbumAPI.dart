@@ -49,4 +49,39 @@ class ConnexionAlbumAPI {
   }
 
 }
-}
+  // Méthode pour modifier un album existant
+  Future<bool> updateAlbum(int idAlbum, String nomAlbum, String descAlbum, String artisteAlbum, bool groupeAlbum, String pochetteAlbum, String compoAlbum, String linkAlbum, String linkArtiste) async {
+ 
+    
+    try {
+      final response = await http.put(
+        Uri.parse('http://192.168.203.10:81/api/albums'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, dynamic>{
+          "idalbum": idAlbum,
+          "nomalbum": nomAlbum,
+          "descalbum": descAlbum,
+          "artistealbum": artisteAlbum,
+          "groupealbum": groupeAlbum,
+          "pochettealbum": pochetteAlbum,
+          "compositeuralbum": compoAlbum,
+          "linkyoualbum": linkAlbum,
+          "linkartistealbum": linkArtiste,
+        }),
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 204) {
+        print("Album modifié avec succès");
+        return true;
+      } else {
+        print("Erreur lors de la modification de l'album : ${response.statusCode}");
+        print("Réponse serveur : ${response.body}");
+        return false;
+      }
+    } catch (e) {
+      print("Erreur lors de la modification : $e");
+      return false;
+    }
+  }}
