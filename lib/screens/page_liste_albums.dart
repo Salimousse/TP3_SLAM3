@@ -17,14 +17,28 @@ class _ListeAlbumsState extends State<ListeAlbums> {
 
   // liste pour la recherche
   List<Map<dynamic, dynamic>> _initialList = [];
+
+  // Rafraîchit la liste depuis l'API
+  Future<void> refreshAlbums() async {
+    final value = await listeAlbumAPI();
+    setState(() {
+      listeAlbumDesc = value;
+      _initialList = [...listeAlbumDesc];
+    });
+  }
   
   // indique si le chargement a échoué
   bool _loadingError = false;
 // fonction mise à jour de la liste
  void updateList(List<Map> updatedList) {
-  setState(() {
-    listeAlbumDesc = updatedList.map((e) => Map<dynamic, dynamic>.from(e)).toList();
-  });
+  // Si la liste est vide, cela signifie qu'on veut rafraîchir depuis l'API (après modif)
+  if (updatedList.isEmpty) {
+    refreshAlbums();
+  } else {
+    setState(() {
+      listeAlbumDesc = updatedList.map((e) => Map<dynamic, dynamic>.from(e)).toList();
+    });
+  }
 
 }
  Future<List<Map>> listeAlbumAPI() async {

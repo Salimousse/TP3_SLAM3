@@ -39,7 +39,7 @@ class _AlbumState extends State<Album> {
       List<Map<String, dynamic>> listeAlbumDesc = FavoriAlbum.listeAlbums;
       int index = listeAlbumDesc.indexWhere((element) => element['nomAlbum'] == widget.nomAlbum);
       bool isFavori = index != -1 ? (listeAlbumDesc[index]['favori'] ?? false) : false;
-      
+
       return GestureDetector(
         onTap: () async {
           InfoAlbum album = InfoAlbum(
@@ -61,7 +61,15 @@ class _AlbumState extends State<Album> {
               builder: (context) => PageInfoAlbums(album: album),
             ),
           );
-          // Ne rien faire ici, la page liste doit gérer le rafraîchissement si besoin
+          if (result == true) {
+            // Rafraîchir la liste après modification
+            if (mounted) {
+              // On appelle la fonction updateList avec la nouvelle liste récupérée depuis l'API
+              // On suppose que le parent (ListeAlbums) a une méthode pour recharger la liste
+              // On utilise un callback pour demander le rafraîchissement
+              widget.updateList([]); // On passe une liste vide pour signaler le rafraîchissement
+            }
+          }
         },
         child: Container(
          padding: EdgeInsets.all(2) ,   child: Card( 

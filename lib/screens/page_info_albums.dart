@@ -68,12 +68,15 @@ class _PageInfoAlbumsState extends State<PageInfoAlbums> {
                 linkyoualbum: widget.album.linkyoualbum,
                 linkartistealbum: widget.album.linkArtiste,
               );
-              Navigator.push(
+              final result = await Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => PageModifAlbum(album: albumApi, idAlbum: idAlbum),
                 ),
               );
+              if (result == true) {
+                Navigator.pop(context, true); // Propager le rafraîchissement à la liste
+              }
             },
           ),
         ],
