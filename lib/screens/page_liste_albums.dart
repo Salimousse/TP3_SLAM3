@@ -12,13 +12,22 @@ class ListeAlbums extends StatefulWidget {
 }
 
 class _ListeAlbumsState extends State<ListeAlbums> {
-  //liste des albums
+  // ListeAlbums : écran principal affichant la liste des albums récupérés depuis l'API ou en dur.
+  // Gère la recherche, le rafraîchissement après modification, et l'affichage des albums.
+  //
+  // listeAlbumDesc : liste affichée à l'écran
+  // _initialList : copie initiale pour la recherche
+  // updateList : callback pour mettre à jour la liste (ou la rafraîchir après modif)
+  // refreshAlbums : recharge la liste depuis l'API
+  // _chargerDonneesEnDur : fallback si l'API échoue
+  // listeAlbumAPI : récupère la liste depuis l'API
+  // _loadingError : indique si une erreur de chargement est survenue
   List<Map<dynamic, dynamic>> listeAlbumDesc = [];
 
   // liste pour la recherche
   List<Map<dynamic, dynamic>> _initialList = [];
 
-  // Rafraîchit la liste depuis l'API
+  // Rafraîchit la liste depuis l'API (appelé après modification ou si besoin)
   Future<void> refreshAlbums() async {
     final value = await listeAlbumAPI();
     setState(() {
@@ -29,7 +38,7 @@ class _ListeAlbumsState extends State<ListeAlbums> {
   
   // indique si le chargement a échoué
   bool _loadingError = false;
-// fonction mise à jour de la liste
+// Met à jour la liste affichée ou déclenche un rafraîchissement complet si la liste passée est vide
  void updateList(List<Map> updatedList) {
   // Si la liste est vide, cela signifie qu'on veut rafraîchir depuis l'API (après modif)
   if (updatedList.isEmpty) {
@@ -41,6 +50,7 @@ class _ListeAlbumsState extends State<ListeAlbums> {
   }
 
 }
+ // Récupère la liste des albums depuis l'API, sinon fallback sur des données en dur
  Future<List<Map>> listeAlbumAPI() async {
     listeAlbumDesc = [];
     try {
@@ -75,6 +85,7 @@ class _ListeAlbumsState extends State<ListeAlbums> {
     return listeAlbumDesc;
   }
 
+  // Remplit la liste avec des données statiques si l'API échoue
   void _chargerDonneesEnDur() {
     // Si la connexion à l'API échoue, afficher les données en dur
     listeAlbumDesc = [
@@ -108,7 +119,7 @@ class _ListeAlbumsState extends State<ListeAlbums> {
 
 
 
-// fonction recherche
+// Recherche dans la liste des albums (filtre sur le nom)
   void recherche(String chaineCa) {
     setState(() {
       if (chaineCa.isEmpty) {
@@ -124,6 +135,7 @@ class _ListeAlbumsState extends State<ListeAlbums> {
   }
 
   @override
+  // Initialisation : on charge la liste des albums depuis l'API
   void initState() {
     super.initState();
     listeAlbumAPI().then((value) {

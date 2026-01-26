@@ -6,6 +6,7 @@ import 'package:flutter_application_2/screens/page_info_albums.dart';
 import 'package:flutter_application_2/screens/page_liste_albums.dart';
 
 
+// Widget Album : représente un album dans la liste, gère l'affichage et le clic pour voir les détails
 class Album extends StatefulWidget {
    Album({Key? key, required this.idAlbum, this.nomAlbum, this.description, this.nomGroupe, this.image, this.linkyoualbum, this.linkArtiste, required this.updateList}) 
     : super(key: key); 
@@ -23,7 +24,7 @@ class Album extends StatefulWidget {
 }
 
 class _AlbumState extends State<Album> {
-// fonction mise à jour de la liste des favoris
+// Met à jour la liste des favoris et notifie le parent via updateList
  void updateFavorite(bool newFavorite) {
     List<Map<String, dynamic>> listeAlbumDesc = FavoriAlbum.listeAlbums;
     int index = listeAlbumDesc.indexWhere((element) => element['nomAlbum'] == widget.nomAlbum);
@@ -33,7 +34,8 @@ class _AlbumState extends State<Album> {
     }
   }
 
-   @override
+  @override
+  // Affiche la carte de l'album, gère le clic pour ouvrir les détails et le retour après modification
    Widget build(BuildContext context) {
       // Récupérer le statut favori de l'album
       List<Map<String, dynamic>> listeAlbumDesc = FavoriAlbum.listeAlbums;

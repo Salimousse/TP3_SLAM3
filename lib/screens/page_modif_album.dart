@@ -13,7 +13,9 @@ import 'package:flutter_application_2/models/DataClass/AlbumAPI.dart';
 }
 
 class _PageModifAlbumState extends State<PageModifAlbum> {
+  // Formulaire de modification d'un album (tous les champs)
   final _formKey = GlobalKey<FormState>();
+  // Contrôleurs pour chaque champ du formulaire
   late TextEditingController _nomController;
   late TextEditingController _descController;
   late TextEditingController _artisteController;
@@ -24,6 +26,7 @@ class _PageModifAlbumState extends State<PageModifAlbum> {
   late bool _groupealbum;
 
   @override
+  // Initialisation des contrôleurs avec les valeurs de l'album à modifier
   void initState() {
     super.initState();
     _nomController = TextEditingController(text: widget.album.nomalbum ?? '');
@@ -37,6 +40,7 @@ class _PageModifAlbumState extends State<PageModifAlbum> {
   }
 
   @override
+  // Libération des ressources des contrôleurs
   void dispose() {
     _nomController.dispose();
     _descController.dispose();
@@ -47,7 +51,7 @@ class _PageModifAlbumState extends State<PageModifAlbum> {
     _linkArtisteController.dispose();
     super.dispose();
   }
-
+// Page de modification d'album avec tous les champs et validation
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,6 +67,7 @@ class _PageModifAlbumState extends State<PageModifAlbum> {
               TextFormField(
                 controller: _nomController,
                 decoration: const InputDecoration(labelText: 'Nom de l\'album'),
+                // Validation du champ (obligatoire)
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Veuillez entrer le nom de l\'album';
@@ -116,6 +121,9 @@ class _PageModifAlbumState extends State<PageModifAlbum> {
                 decoration: const InputDecoration(labelText: 'Lien Artiste'),
               ),
               const SizedBox(height: 20),
+
+
+              // bouton pour valider en utlisant updatealbum 
               ElevatedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {

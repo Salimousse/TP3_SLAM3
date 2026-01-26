@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'package:flutter_application_2/models/DataClass/AlbumAPI.dart';
 import 'package:http/http.dart' as http;
 
+// Service pour gérer les appels API liés aux albums (GET, POST, PUT)
 class ConnexionAlbumAPI {
+  // Récupère la liste des albums depuis l'API
   Future<List<AlbumApi>?> getAlbums() async {
     try {
       var uri = Uri.parse('http://192.168.203.10:81/api/albums');
@@ -17,6 +19,7 @@ class ConnexionAlbumAPI {
     }
 
 
+    // Crée un nouvel album via l'API
     Future<bool> createAlbum(String nomAlbum, String descAlbum,String artisteAlbum, bool groupeAlbum, String pochetteAlbum, String compoAlbum, String linkAlbum , String linkArtiste ) async {
       print("--- Début createAlbum ---");
       print("Données envoyées : Nom=$nomAlbum, Artiste=$artisteAlbum, Groupe=$groupeAlbum");
@@ -49,7 +52,7 @@ class ConnexionAlbumAPI {
   }
 
 }
-  // Méthode pour modifier un album existant
+  // Modifie un album existant via l'API
   Future<bool> updateAlbum(int idAlbum, String nomAlbum, String descAlbum, String artisteAlbum, bool groupeAlbum, String pochetteAlbum, String compoAlbum, String linkAlbum, String linkArtiste) async {
  
     

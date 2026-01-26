@@ -29,7 +29,7 @@ class _PageInfoAlbumsState extends State<PageInfoAlbums> {
     int index = ListeAlbumDesc.indexWhere((element) => element['nomAlbum'] == widget.album.nomAlbum);
     favoriAlbum = index != -1 ? (ListeAlbumDesc[index]['favori'] ?? false) : false;
   }
-  // fonction pour changer le statut favori
+  // Change le statut favori de l'album dans la liste locale
   void _toggleFavorite(String rechercheIndex) {
     int index = ListeAlbumDesc.indexWhere((element) => element['nomAlbum'] == rechercheIndex);
     setState(() {
@@ -41,17 +41,20 @@ class _PageInfoAlbumsState extends State<PageInfoAlbums> {
   }
 
   @override
+  // Affiche les détails d'un album, permet de le modifier (bouton edit)
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Informations sur l'album"),
         leading: IconButton(
+          // Retour à la liste, on renvoie le statut favori (pour éventuelle mise à jour)
           icon: Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context, favoriAlbum);
           },
         ),
         actions: [
+          // Bouton pour modifier l'album : ouvre la page de modification et propage le rafraîchissement si besoin
           IconButton(
             icon: const Icon(Icons.edit),
             tooltip: 'Modifier',
